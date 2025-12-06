@@ -28,3 +28,12 @@ feature_columns = learn.infer_real_valued_columns_from_input(data)
 classifier = learn.LinearClassifier(n_classes=10, 
                                     feature_columns=feature_columns)
 classifier.fit(data, labels, batch_size=100, steps=1000)
+
+classifier.evaluate(test_data, test_labels)
+print(classifier.evaluate(test_data, test_labels)["accuracy"])
+
+prediction = classifier.predict(np.array([test_data[0]], 
+                                         dtype=float), 
+                                         as_iterable=False)
+print("prediction : {}, label : {}".format(prediction, 
+      test_labels[0]) )
